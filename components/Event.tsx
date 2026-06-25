@@ -36,11 +36,7 @@ export default function Event() {
 
                 <div className="flex gap-3">
                   <MapPin size={20} />
-                  <span>
-                    {data.venue.name}
-                    <br />
-                    {data.venue.address}
-                  </span>
+                  <span>{data.akad.venue}</span>
                 </div>
               </div>
             </div>
@@ -62,30 +58,26 @@ export default function Event() {
 
                 <div className="flex gap-3">
                   <MapPin size={20} />
-                  <span>
-                    {data.venue.name}
-                    <br />
-                    {data.venue.address}
-                  </span>
+                  <span>{data.reception.venue}</span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Maps */}
-          <div className="mt-12">
+          <div className="mt-12 space-y-4">
             <div className="rounded-3xl overflow-hidden shadow">
-              {data.venue.frameUrl && (
+              {data.reception.frameUrl && (
                 <div
-                  className="w-full h-96"
-                  dangerouslySetInnerHTML={{ __html: data.venue.frameUrl }}
+                  className="w-96 h-96"
+                  dangerouslySetInnerHTML={{ __html: data.reception.frameUrl }}
                 />
               )}
             </div>
 
             <div className="text-center mt-8">
               <a
-                href={data.venue.mapsUrl}
+                href={data.reception.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block bg-[#c8a96a] text-white px-8 py-4 rounded-full hover:opacity-90 transition"

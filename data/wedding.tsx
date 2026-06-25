@@ -9,11 +9,16 @@ export const weddingData = {
   akad: {
     date: "30 Maret 2030",
     time: "08:00 WIB",
+    venue: "KUA Kecamatan Cipari",
   },
 
   reception: {
     date: "30 Maret 2030",
     time: "11:00 WIB",
+    venue: "Masjid Al-Huda",
+    frameUrl:
+      '<iframe src="https://www.google.com/maps/embed?pb=!3m2!1sid!2sid!4v1782409749481!5m2!1sid!2sid!6m8!1m7!1s994XEz01Ul-P54TcprXL-Q!2m2!1d-7.401873836570695!2d108.7919552744254!3f220.5578087850361!4f-7.450120033885341!5f0.7820865974627469" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>',
+    mapsUrl: "https://maps.app.goo.gl/BufVikFEDagiXfVX7",
   },
 
   gift: {
@@ -21,14 +26,6 @@ export const weddingData = {
     accountNumber: "1234567890",
     accountName: "Muhamad Naufal",
     qr: "/qr.webp",
-  },
-
-  venue: {
-    name: "Gedung Serbaguna",
-    address: "Cilacap, Jawa Tengah, Indonesia",
-    frameUrl:
-      '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d831.7662720780943!2d108.78767891790464!3d-7.4020397317460365!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e65810066e3f625%3A0xd3807122c0af7f83!2sWarung%20PaHendri!5e0!3m2!1sid!2sid!4v1782377295693!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>',
-    mapsUrl: "https://maps.app.goo.gl/RdiasxK6ZQ8CH5iN8",
   },
 
   story: [

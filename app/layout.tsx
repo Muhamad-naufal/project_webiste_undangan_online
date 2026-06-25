@@ -3,7 +3,7 @@ import { Playfair_Display, Poppins } from "next/font/google";
 import "./globals.css";
 
 export const metadata = {
-  title: "System Running......",
+  title: "Invitation",
   description: "Wedding Invitation",
   icons: {
     icon: "/favicon.png",
