@@ -13,13 +13,14 @@ import Gift from "@/components/Gift";
 import MusicPlayer from "@/components/MusicPlayer";
 import { useSearchParams } from "next/navigation";
 
-export default function Home() {
+export default function Home({ guestName }: { guestName: string }) {
   const [opened, setOpened] = useState(false);
 
   return (
     <>
       {!opened && (
         <Cover
+          guestName={guestName}
           onOpen={() => {
             setOpened(true);
 

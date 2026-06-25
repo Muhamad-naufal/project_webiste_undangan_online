@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FadeUp from "./FadeUp";
 import { supabase } from "@/lib/supabase";
+import SuccessModal from "./SuccessModal";
 
 export default function RSVP() {
   const [form, setForm] = useState({
@@ -11,6 +12,43 @@ export default function RSVP() {
     guests: 1,
     message: "",
   });
+
+  const [stats, setStats] = useState({
+    hadir: 0,
+    tidakHadir: 0,
+    totalTamu: 0,
+  });
+
+  const [successOpen, setSuccessOpen] = useState(false);
+
+  const fetchStats = async () => {
+    const { data, error } = await supabase
+      .from("rsvp")
+      .select("attendance, guests");
+
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    const hadir = data.filter((item) => item.attendance === "hadir").length;
+
+    const tidakHadir = data.filter(
+      (item) => item.attendance === "tidak_hadir",
+    ).length;
+
+    const totalTamu = data.reduce((sum, item) => sum + (item.guests || 0), 0);
+
+    setStats({
+      hadir,
+      tidakHadir,
+      totalTamu,
+    });
+  };
+
+  useEffect(() => {
+    fetchStats();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,7 +68,9 @@ export default function RSVP() {
       return;
     }
 
-    alert("Terima kasih ❤️");
+    await fetchStats();
+
+    setSuccessOpen(true);
 
     setForm({
       name: "",
@@ -53,17 +93,17 @@ export default function RSVP() {
 
             <div className="grid grid-cols-3 gap-4 mb-10">
               <div className="bg-[#faf7f2] p-5 rounded-2xl text-center">
-                <h3 className="text-2xl font-bold">128</h3>
+                <h3 className="text-2xl font-bold">{stats.hadir}</h3>
                 <p>Hadir</p>
               </div>
 
               <div className="bg-[#faf7f2] p-5 rounded-2xl text-center">
-                <h3 className="text-2xl font-bold">25</h3>
+                <h3 className="text-2xl font-bold">{stats.tidakHadir}</h3>
                 <p>Tidak Hadir</p>
               </div>
 
               <div className="bg-[#faf7f2] p-5 rounded-2xl text-center">
-                <h3 className="text-2xl font-bold">153</h3>
+                <h3 className="text-2xl font-bold">{stats.totalTamu}</h3>
                 <p>Total Tamu</p>
               </div>
             </div>
@@ -72,7 +112,6 @@ export default function RSVP() {
           <form onSubmit={handleSubmit} className="space-y-5">
             <input
               type="text"
-              placeholder="Nama Lengkap"
               required
               value={form.name}
               onChange={(e) =>
@@ -134,6 +173,7 @@ export default function RSVP() {
           </form>
         </div>
       </section>
+      <SuccessModal open={successOpen} onClose={() => setSuccessOpen(false)} />
     </FadeUp>
   );
 }
